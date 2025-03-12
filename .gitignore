@@ -276,3 +276,5 @@ eventuais/media/
 .env
 .envs/*
 !.envs/.local/
+.qodo
+.history

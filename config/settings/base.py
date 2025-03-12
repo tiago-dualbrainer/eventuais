@@ -70,6 +70,7 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "django_filters",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -85,10 +86,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-LOCAL_APPS = [
-    "eventuais.users",
-    # Your stuff: custom apps go here
-]
+LOCAL_APPS = ["eventuais.users", "eventuais.projects"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -147,6 +145,40 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+# Allow CORS from these origins
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    # Add any other origins you need
+]
+
+# Required for CSRF protection with cross-origin requests
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    # Add any other origins you need
+]
+
+# Cookie settings for CSRF
+CSRF_COOKIE_SAMESITE = "Lax"  # Use 'None' for cross-site requests (requires HTTPS)
+CSRF_COOKIE_HTTPONLY = False  # Must be False to allow JavaScript to read the cookie
+CSRF_USE_SESSIONS = False  # Store CSRF in cookie, not session
+
+# Session cookie settings
+SESSION_COOKIE_SAMESITE = "Lax"  # Use 'None' for cross-site requests (requires HTTPS)
+
+# For development (switch to True in production with HTTPS)
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+
+# For production, we need to specify our Next.js domain!
+# CORS_ALLOWED_ORIGINS = [
+#     "https://your-nextjs-app-domain.com",
+# ]
+
+# Allow credentials (cookies)
+CORS_ALLOW_CREDENTIALS = True
 
 # STATIC
 # ------------------------------------------------------------------------------
@@ -338,6 +370,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup

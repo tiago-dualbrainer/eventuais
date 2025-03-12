@@ -21,7 +21,10 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - '8000:8000'
-    command: /start
+      - '5678:5678'
+    command: bash -c "pip install debugpy && python -m debugpy --listen 0.0.0.0:5678 --wait-for-client manage.py runserver 0.0.0.0:8000"
+
+
 
   postgres:
     build:
@@ -34,6 +37,8 @@ services:
       - eventuais_local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+    ports:
+      - "5433:5432" 
 
   mailpit:
     image: docker.io/axllent/mailpit:latest
