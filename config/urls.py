@@ -24,7 +24,9 @@ urlpatterns = [
     path("users/", include("eventuais.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("api/", include("eventuais.projects.urls")),  # Media files
+    path("api/projects/", include("eventuais.projects.urls")),  # Project API
+    path("api/crm/", include("eventuais.crm.api.urls")),  # CRM API
+    # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 if settings.DEBUG:
