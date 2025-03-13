@@ -116,7 +116,10 @@ class CustomField(models.Model):
 
     # For select/multiselect fields
     choices = models.JSONField(
-        _("Choices"), blank=True, null=True, help_text=_("JSON array of choices for select fields")
+        _("Choices"),
+        blank=True,
+        null=True,
+        help_text=_("JSON array of choices for select fields"),
     )
 
     is_required = models.BooleanField(_("Required"), default=False)
@@ -139,7 +142,10 @@ class CustomFieldValue(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     field = models.ForeignKey(
-        CustomField, on_delete=models.CASCADE, related_name="values", verbose_name=_("Custom Field")
+        CustomField,
+        on_delete=models.CASCADE,
+        related_name="values",
+        verbose_name=_("Custom Field"),
     )
 
     # Generic relation to the object this value belongs to
@@ -219,7 +225,10 @@ class Account(MPTTModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(_("Account Name"), max_length=255)
     account_type = models.CharField(
-        _("Account Type"), max_length=20, choices=AccountType.choices, default=AccountType.CUSTOMER
+        _("Account Type"),
+        max_length=20,
+        choices=AccountType.choices,
+        default=AccountType.CUSTOMER,
     )
     industry = models.CharField(_("Industry"), max_length=20, choices=Industry.choices, null=True, blank=True)
     website = models.URLField(_("Website"), blank=True)
@@ -403,7 +412,10 @@ class Opportunity(models.Model):
 
     # Relationships
     account = models.ForeignKey(
-        Account, on_delete=models.CASCADE, related_name="opportunities", verbose_name=_("Account")
+        Account,
+        on_delete=models.CASCADE,
+        related_name="opportunities",
+        verbose_name=_("Account"),
     )
 
     primary_contact = models.ForeignKey(
@@ -531,7 +543,9 @@ class Segment(models.Model):
 
     # Whether this segment updates dynamically or is static
     is_dynamic = models.BooleanField(
-        _("Dynamic Segment"), default=True, help_text=_("If true, membership updates automatically based on criteria")
+        _("Dynamic Segment"),
+        default=True,
+        help_text=_("If true, membership updates automatically based on criteria"),
     )
 
     # For static segments, store explicit members
@@ -561,7 +575,9 @@ class MarketingEmail(models.Model):
     # Email content
     html_content = models.TextField(_("HTML Content"))
     text_content = models.TextField(
-        _("Text Content"), blank=True, help_text=_("Plain text version for email clients that don't support HTML")
+        _("Text Content"),
+        blank=True,
+        help_text=_("Plain text version for email clients that don't support HTML"),
     )
 
     # Campaign association
@@ -570,7 +586,9 @@ class MarketingEmail(models.Model):
     # Sequence position (for drip campaigns)
     sequence_order = models.PositiveSmallIntegerField(_("Sequence Order"), default=0)
     delay_days = models.PositiveSmallIntegerField(
-        _("Delay (Days)"), default=0, help_text=_("Days to wait before sending this email")
+        _("Delay (Days)"),
+        default=0,
+        help_text=_("Days to wait before sending this email"),
     )
 
     # Ownership and metadata
@@ -607,7 +625,10 @@ class CampaignRecipient(models.Model):
 
     # Status tracking
     status = models.CharField(
-        _("Status"), max_length=20, choices=RecipientStatus.choices, default=RecipientStatus.PENDING
+        _("Status"),
+        max_length=20,
+        choices=RecipientStatus.choices,
+        default=RecipientStatus.PENDING,
     )
 
     # Engagement tracking
@@ -651,7 +672,10 @@ class SupportTicket(models.Model):
     # Ticket classification
     status = models.CharField(_("Status"), max_length=20, choices=TicketStatus.choices, default=TicketStatus.NEW)
     priority = models.CharField(
-        _("Priority"), max_length=20, choices=TicketPriority.choices, default=TicketPriority.MEDIUM
+        _("Priority"),
+        max_length=20,
+        choices=TicketPriority.choices,
+        default=TicketPriority.MEDIUM,
     )
     category = models.CharField(_("Category"), max_length=100, blank=True)
 
@@ -661,7 +685,11 @@ class SupportTicket(models.Model):
 
     # Support agent handling the ticket
     assigned_to = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="assigned_tickets"
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="assigned_tickets",
     )
 
     # Tracking
@@ -746,7 +774,10 @@ class Report(models.Model):
     filters = models.JSONField(_("Filters"), default=list)
     sort_by = models.CharField(_("Sort By"), max_length=100, blank=True)
     sort_direction = models.CharField(
-        _("Sort Direction"), max_length=4, default="desc", choices=[("asc", "Ascending"), ("desc", "Descending")]
+        _("Sort Direction"),
+        max_length=4,
+        default="desc",
+        choices=[("asc", "Ascending"), ("desc", "Descending")],
     )
 
     # Ownership and sharing
