@@ -60,6 +60,8 @@ extend-exclude = [
     "*/migrations/*.py",
     "staticfiles/*",
 ]
+select = ["E", "F", "I"]  # Include "I" for import sorting
+extend-select = ["I"]
 
 [tool.ruff.lint]
 select = [

@@ -42,11 +42,12 @@ class Resource(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
+    class Meta:  # type: ignore
         abstract = True
 
     def __str__(self):
         return f"{self.name} ({self.type})"
+
 
 class Equipment(Resource):
     """Equipment resource model."""

@@ -3,35 +3,35 @@ from .models import Project, Equipment, Crew, Transportation, ProjectResourceAll
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = Project
         fields = "__all__"
         read_only_fields = ("id", "created_at", "updated_at")
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = Equipment
         fields = "__all__"
         read_only_fields = ("id", "type", "created_at", "updated_at")
 
 
 class CrewSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = Crew
         fields = "__all__"
         read_only_fields = ("id", "type", "created_at", "updated_at")
 
 
 class TransportationSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = Transportation
         fields = "__all__"
         read_only_fields = ("id", "type", "created_at", "updated_at")
 
 
 class ProjectResourceAllocationSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = ProjectResourceAllocation
         fields = "__all__"
         read_only_fields = ("id", "created_at", "updated_at")
@@ -88,7 +88,7 @@ class ProjectResourceAllocationSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta:  # type: ignore
         model = Task
         fields = "__all__"
         read_only_fields = ("id", "created_at", "updated_at")
@@ -97,7 +97,7 @@ class TaskSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
 
-    class Meta:
+    class Meta:  # type: ignore
         model = Comment
         fields = "__all__"
         read_only_fields = ("id", "author", "created_at", "updated_at")

@@ -4,7 +4,7 @@ from eventuais.users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer[User]):
-    class Meta:
+    class Meta:  # type: ignore
         model = User
         fields = ["name", "url"]
 

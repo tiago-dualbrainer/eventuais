@@ -35,6 +35,6 @@ class UserFactory(DjangoModelFactory[User]):
             # Some post-generation hooks ran, and may have modified us.
             instance.save()
 
-    class Meta:
+    class Meta:  # type: ignore
         model = User
         django_get_or_create = ["email"]
